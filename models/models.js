@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
     name: String,
+    email: String,
     trips: [{type: Schema.Types.ObjectId, ref: 'Trip'}]
 },{ usePushEach: true });
 
