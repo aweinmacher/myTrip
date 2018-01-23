@@ -20,6 +20,7 @@ var Todo = require('./models/models').todo;
 
 // 1) to check if the user exists by email and send data back if exists
 app.get('/users', function (req, res) {
+    User.find(function(error,data){
   // returns an object if user exists
   res.send({
       "_id" : "5a6708ced9d33a19c8584bcf",
@@ -45,12 +46,13 @@ app.get('/users', function (req, res) {
               "user" : "5a6708ced9d33a19c8584bcf",
               "text" : "Enjoy awesome stuff we learn"
           }],
-          "user" : ObjectId("5a6708ced9d33a19c8584bcf"),
+          "user" : "5a6708ced9d33a19c8584bcf",
           "country" : "Country 1"
       }
       ],
-      "name" : "User 1"
+      "name" : "adam"
   })
+})
 })
 
 
