@@ -55,6 +55,8 @@ $('#submitcountry').on('click', function () {
     console.log(country.val())
     $('.choosecountry').toggle()
     $('.search-result').toggle()
+    $('.features').toggle()
+
 })
 
 
