@@ -18,44 +18,18 @@ var User = require('./models/models').user;
 var Trip = require('./models/models').trip;
 var Todo = require('./models/models').todo;
 
-// 1) to check if the user exists by email and send data back if exists
-app.get('/users', function (req, res) {
-  // returns an object if user exists
-  res.send({
-      "_id" : "5a6708ced9d33a19c8584bcf",
-      "email": "user@gmail.com",
-      "trips" : [
-        {
-          "_id" : "5a6708ced9d33a19c8584bd0",
-          "flight" : {
-              "departure" : {
-                  "date" : "23-Jan-2018",
-                  "time" : "9:00"
-              },
-              "arrival" : {
-                  "date" : "25-Jan-2018",
-                  "time" : "12:00"
-              },
-              "number" : "Team-106",
-              "from" : "Elevation",
-              "to" : "First IT job"
-          },
-          "todos" : [{
-              "_id" : "5a6708ced9d33a19c8584bd1",
-              "user" : "5a6708ced9d33a19c8584bcf",
-              "text" : "Enjoy awesome stuff we learn"
-          }],
-          "user" : ObjectId("5a6708ced9d33a19c8584bcf"),
-          "country" : "Country 1"
-      }
-      ],
-      "name" : "User 1"
+// 1) if email exists - send user object; if not - senf empty array
+app.get('/authorisation/:email', function (req, res) {
+  var mail = req.params.email;
+  User.find({email: mail},function (err, data) {
+    if (err) throw err;
+    else res.send(data);
   })
 })
 
-
-// 2) to handle adding a new user
-app.post('/users', function (req, res) {
+// 2) to handle adding a new user - returns newly created object
+app.post('/users/signup/:name/:email', function (req, res) {
+  
   // returns an object with user
 })
 
