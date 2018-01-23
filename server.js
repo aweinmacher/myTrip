@@ -46,12 +46,14 @@ app.post('/users/:userId/trips', function (req, res) {
   User.findById(userId, function (err, data) {
     if (err) throw err;
     var newTrip = new Trip({
-      'user': userId,
+      'user': data._id,
       'country': req.body.country
     });
     newTrip.save();
+    console.log(newTrip);
     data.trips.push(newTrip);
     data.save(function (err, data) {
+      if (err) throw err;
       data.populate('trips', function (err, pop) {
         if (err) throw err;
         res.send(pop);
