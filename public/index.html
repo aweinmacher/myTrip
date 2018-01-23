@@ -68,16 +68,11 @@
 
   <!-- SHOW COUNTRY INFO !-->
   <div class="container search-result">
-    <div class="row">
-      <div class="col-md-4 weather">
-        <h1>weather HANDLEBARS</h1>
-      </div>
-      <div class="col-md-8 countryinfo">
-        <h1>countryinfo HANDLEBARS</h1>
-      </div>
+
+
     </div>
 
-    <div class="container">
+    <div class="container features">
       <div class="row text-center">
         <div class="btn-group" role="group" aria-label="Features">
           <button type="button" class="btn btn-info">Add flight details</button>
@@ -90,10 +85,29 @@
       </div>
     </div>
 
+    <script id="post-item" type="text/x-handlebars-template">
+      <div class="row" data-name="{{name}}">
+          <div class="col-md-4 weather" data-name="{{name}}">
+            <h1>Current Temperature:</h1>
+          <h2> {{tempc}} &#8451; </h2>
+          <h2> {{far}} &#x2109;</h2>
+          </div>
+          <div class="col-md-8 countryinfo" data-name="{{name}}">
+          <img class="flag" src={{flagLink}}>
+          <h1 id="countryname">Country: {{name}}</h1>
+          <h3 id="continent">Continent: {{continent}}</h3>
+          <h3 id="capital">Capital: {{capital}}</h3>
+          <p class="info">Language:{{#each languages}} {{this.name}} {{/each}}  , <a href="{{wikipediaLink}}">Wikipedia Link</a>
+          </p>
+      </div>
+  </script>
+
     <script type="text/javascript" src="jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="handlebars/dist/handlebars.min.js"></script>
     <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="country.js"></script>
+
 </body>
 
 </html>

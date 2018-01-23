@@ -9,6 +9,9 @@ body {
      padding-right: 40px; 
     }
 
+.flag {
+    height: 100px;
+}
     
 .choosecountry {
     display: none;
@@ -18,3 +21,6 @@ body {
     display: none
 }
 
+.features {
+    display: none
+}
