@@ -18,10 +18,11 @@
   },
   "homepage": "https://github.com/adamico10/myTrip#readme",
   "dependencies": {
-    "bootstrap": "^4.0.0",
+    "mongoose": "^5.0.1",
+    "bootstrap": "^3.3.7",
     "express": "^4.16.2",
+    "font-awesome": "^4.7.0",
     "handlebars": "^4.0.11",
-    "jquery": "^3.3.1",
-    "mongoose": "^5.0.1"
+    "jquery": "^3.2.1"
   }
 }

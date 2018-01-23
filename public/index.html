@@ -1,28 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <link rel="stylesheet" type="text/css" href="bootstrap\dist\css\bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="font-awesome\css\font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Trip</title>
-</head>
-
+  <title>My Trip</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="bootstrap\dist\css\bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+ </head>
 <body>
+<div class="container">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="#" class="navbar-left"><img class="mytrip-logo" src="https://image.ibb.co/ds3cBw/logo.png"></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Intro</a></li>
+      <li><a href="#">Flight Details</a></li>
+      <li><a href="#">Wish To Do</a></li>
+    </ul>
+  </div>
+</nav>
+</div>
+
+<!-- WELCOME USER !--> 
+<div class="container">
+  <div class="page-header">
+    <h1>Welcome To My Trip</h1> 
+    <h3>The ultimate place to store your next trip info and see others wish to do lists</h3> 
+  </div>
+
+</div>
+
+<div class="container">
+<form class="post-form">
+  <h3>Please enter your name below</h3>
+  <div class="form-group">
+      <input class="form-control" type="text" id="userName" placeholder="Enter your name please"/>
+  </div>
+  <button type="button" id="signIn" class="btn btn-primary">Sign in</button>
+</form>
+</div>
 
 
-
-
-
-
-
-    <script type="text/javascript" src="jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="handlebars/dist/handlebars.min.js"></script>
+<script type="text/javascript" src="jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="handlebars/dist/handlebars.min.js"></script>
 
 </body>
-
 </html>
