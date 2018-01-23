@@ -1,14 +1,16 @@
 var users = []
 
 
-var fetch = function () {
+var fetch = function (email) {
     $.ajax({
         method: "GET",
-        url: '/users',
+        url: '/authorisation/' + email,
         success: function (data) {
             console.log("fetch successfully");
             users = data;
-            console.log(users);
+        },
+        complete: function () {
+            checkUserInArr(email)
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus);
@@ -16,29 +18,36 @@ var fetch = function () {
     })
 }
 
-fetch()
-
-
-$('#signIn').on('click', function () {
-    var name = $('#userName')
-    var email = $('#eMail')
-    if (name.val() === "" || email.val() === "") {
-        alert("please enter your name and email!")
-    } else {
-        // for (var i = 0; i < users.length; i++) {
-        if (name.val().toLowerCase() == users.name && email.val().toLowerCase() == users.email) {
+var checkUserInArr = function (emailAdd) {
+    for (var i = 0; i < users.length; i++) {
+        if (emailAdd.toLowerCase() == users[i].email) {
             console.log("user found")
             $('.username-form').toggle();
             $('.choosecountry').toggle();
-            var hello = name.val().charAt(0).toUpperCase() + name.val().slice(1).toLowerCase()
+            var name = users[i].name
+            var hello = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
             $('.hellouser').append("Hello " + hello)
-            name.val("");
-            email.val("")
-        } else {
-            alert("user not found ! try again")
         }
     }
-})
+}
+
+
+
+$('#signIn').on('click', function () {
+
+    var name = $('#userName')
+    var email = $('#eMail')
+    var emailAdd = email.val()
+    if (emailAdd === "") {
+        alert("please enter your name and email!")
+    } else {
+        fetch(emailAdd)
+        name.val("");
+        email.val("")
+    }
+}
+)
+
 
 
 $('#submitcountry').on('click', function () {
