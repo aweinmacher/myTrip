@@ -2,9 +2,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/tripDB',{useMongoClient:true},function(err,db){
-  if (err) { console.log("database is not connected !")};
-  if (db) {console.log("Database connected Successfully")}
+mongoose.connect('mongodb://localhost/tripDB', { useMongoClient: true }, function (err, db) {
+  if (err) { console.log("database is not connected !") };
+  if (db) { console.log("Database connected Successfully") }
 });
 
 var app = express();
@@ -20,29 +20,54 @@ var Todo = require('./models/models').todo;
 
 // 1) if email exists - send user object; if not - senf empty array
 app.get('/authorisation/:email', function (req, res) {
-  var mail = req.params.email;
-  User.find({email: mail},function (err, data) {
+  var email = req.params.email;
+  User.find({ 'email': email }, function (err, data) {
     if (err) throw err;
     else res.send(data);
   })
 })
 
 // 2) to handle adding a new user - returns newly created object
-app.post('/users/signup/:name/:email', function (req, res) {
-  
-  // returns an object with user
+app.post('/users/signup', function (req, res) {
+  var newUser = new User({
+    'name': req.body.name,
+    'email': req.body.email
+  });
+  newUser.save(function (err, data) {
+    if (err) throw err;
+    res.send(data);
+  })
 })
 
 // 3) to handle creating a Trip with a given country and pushing it into user.trips
+// !!! check in frontend if the country exists and come here ONLY if not
+app.post('/users/:userId/trips', function (req, res) {
+  var userId = req.params.userId;
+  User.findById(userId, function (err, data) {
+    if (err) throw err;
+    var newTrip = new Trip({
+      'user': userId,
+      'country': req.body.country
+    });
+    newTrip.save();
+    data.trips.push(newTrip);
+    data.save(function (err, data) {
+      data.populate('trips', function (err, pop) {
+        if (err) throw err;
+        res.send(pop);
+      })
+    })
+  })
+})
 
-// 4) to handle adding a todo
 
-// 5) to handle getting all todos for a certain country
+// 4) to handle deleting a country
 
+// 5) to handle adding a todo
 
+// 6) to handle deleting a todo
 
-
-
+// 6) to handle getting all todos for a certain country
 
 
 
@@ -87,11 +112,9 @@ app.post('/users/signup/:name/:email', function (req, res) {
 // END OF CREATION CODE !!! END OF CREATION CODE !!! END OF CREATION CODE !!! END OF CREATION CODE !!!
 
 
+// ADD ERROR HANDLER - go to the first Node lesson
 
 
-
-
-
-app.listen(8080, function() {
-    console.log("Server connected through port 8080");
-  })
+app.listen(8080, function () {
+  console.log("Server connected through port 8080");
+})
