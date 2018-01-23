@@ -26,6 +26,7 @@ app.get('/authorisation/:email', function (req, res) {
     else res.send(data);
   })
 })
+})
 
 // 2) to handle adding a new user - returns newly created object
 app.post('/users/signup/:name/:email', function (req, res) {
