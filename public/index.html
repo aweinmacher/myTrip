@@ -5,8 +5,14 @@
   <title>My Trip</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- FONTS !-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,400,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Oswald:400" rel="stylesheet" type="text/css">
+  <!-- STYLESHEETS !-->
   <link rel="stylesheet" type="text/css" href="bootstrap\dist\css\bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
@@ -44,48 +50,90 @@
 
   <!-- USER LOGIN !-->
   <div class="container">
-    <form class="post-form username-form">
-      <h3>Please enter your name and email below</h3>
-      <div class="form-group">
-        <input class="form-control" type="text" id="userName" placeholder="Enter your name here" />
-        <input class="form-control" type="text" id="eMail" placeholder="Enter your email here" />
+
+    <div id="loginbox" class="username-form mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+
+      <div class="panel">
+        <div class="panel-heading">
+          <div class="panel-title text-center">Please enter your name and email below</div>
+        </div>
+
+        <div class="panel-body">
+
+          <form id="form" class="post-form username-form form-horizontal">
+
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-user"></i>
+              </span>
+              <input class="form-control" type="text" id="userName" placeholder="Name" />
+            </div>
+
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-envelope"></i>
+              </span>
+              <input class="form-control" type="text" id="eMail" placeholder="Email" />
+            </div>
+
+            <div class="form-group">
+              <!-- Button -->
+              <div class="col-sm-12 controls">
+                <button type="button" id="signIn" class="btn btn-primary pull-right">
+                  <i class="glyphicon glyphicon-log-in"></i> Sign in</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
       </div>
-      <button type="button" id="signIn" class="btn btn-primary">Sign in</button>
-    </form>
+    </div>
   </div>
+
 
   <!-- CHOOSE COUNTRY !-->
   <div class="container">
     <form class="post-form choosecountry">
       <h1 class="hellouser"></h1>
-      <h3>Time to choose you destination</h3>
-      <div class="form-group">
+      <h3>Time to choose your destination</h3>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="glyphicon glyphicon-user"></i>
+        </span>
         <input class="form-control" type="text" id="country" placeholder="Country is:" />
+        <div class="countrynotfound"><span class="error text-danger">Country Not Found</span></div>
       </div>
       <button type="button" id="submitcountry" class="btn btn-primary">Submit</button>
     </form>
   </div>
 
+
   <!-- SHOW COUNTRY INFO !-->
   <div class="container search-result">
 
+  </div>
 
-    </div>
-
-    <div class="container features">
+  <div class="container features">
+    <div class="row text-center">
+      <div class="btn-group" role="group" aria-label="Features">
+        <button type="button" class="btn btn-info">Add flight details</button>
+        <button type="button" class="btn btn-info">Add wish to do list</button>
+        <button type="button" class="btn btn-info">Add another country</button>
+      </div>
       <div class="row text-center">
-        <div class="btn-group" role="group" aria-label="Features">
-          <button type="button" class="btn btn-info">Add flight details</button>
-          <button type="button" class="btn btn-info">Add wish to do list</button>
-          <button type="button" class="btn btn-info">Add another country</button>
-        </div>
-        <div class="row text-center">
-          <button type="button" class="btn btn-success">SAVE</button>
-        </div>
+        <button type="button" class="btn btn-success">SAVE</button>
       </div>
     </div>
+  </div>
 
-    <script id="post-item" type="text/x-handlebars-template">
+  <!-- .container -->
+  <div class="container">
+    <footer class="footer-text">
+      <p>MyTrip© 2018 - Elevation Bootcamp</p>
+    </footer>
+  </div>
+
+  <script id="post-item" type="text/x-handlebars-template">
       <div class="row" data-name="{{name}}">
           <div class="col-md-4 weather" data-name="{{name}}">
             <h1>Current Temperature:</h1>
@@ -101,12 +149,11 @@
           </p>
       </div>
   </script>
-
-    <script type="text/javascript" src="jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="handlebars/dist/handlebars.min.js"></script>
-    <script type="text/javascript" src="main.js"></script>
-    <script type="text/javascript" src="country.js"></script>
+  <script type="text/javascript" src="jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="handlebars/dist/handlebars.min.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="country.js"></script>
 
 </body>
 
