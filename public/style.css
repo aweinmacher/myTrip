@@ -1,4 +1,5 @@
 body {
+    overflow: hidden;
     font-family: Roboto, Arial, sans-serif;
     padding-top: 50px;
     background: url('images/backgroundpicture.jpeg') fixed;
@@ -33,22 +34,54 @@ h3 {
     color: #fff;
     background-color: #1b1818;
     border-color: #f2f6f7;
+    box-shadow: 0 0 30px black;
 }
 .btn-login:hover {
     color: rgb(115, 150, 75);
 }
 
-.choosecountry {
-    display: none;
+.btn-search {
+    color: #fff;
+    background-color: #1b1818;
+    border-color: #f2f6f7;
+    width: 50%;
+    box-shadow: 0 0 30px black;
+    margin-bottom: 30px;
 }
 
+.btn-search:hover {
+    color: rgb(115, 150, 75);
+}
+
+
+
+
+.choosecountry {
+    display: none;
+    box-shadow: 0 0 30px black;
+}
+
+.weather {
+    box-shadow: 0 0 30px black;
+}
 .search-result {
     display: none
 }
 
 .countrynotfound {
-    display: none
+    display: none;
+    margin-top: 5%;
+    padding: 3px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }
+
+.countryinfo {
+    box-shadow: 0 0 30px black;
+}
+
+
 
 .features {
     display: none
@@ -58,6 +91,12 @@ h3 {
 .navbar {
     opacity: 1;
     background-color: #f2f6f7;
+}
+
+.footer {
+    margin-top: 30px;
+    font-size: 15px;
+    opacity: 1;
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
@@ -71,13 +110,18 @@ h3 {
 }
 
 .nav>li>a {
-    padding: 20px 140px;
+    padding: 20px 160px;
 }
+
+#submitcountry {
+    margin-top: 5%;
+}
+
 
 #loginbox {
     margin-top: 30px;
     background-color: transparent;
-
+    box-shadow: 0 0 30px black;
 }
 
 #form > div {
