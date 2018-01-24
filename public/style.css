@@ -93,6 +93,13 @@ h3 {
     border-radius: 4px;
 }
 
+.loginreq{
+    display: none;
+    padding: 3px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
 
 .features {
     display: none;
@@ -103,6 +110,8 @@ h3 {
 .navbar {
     opacity: 1;
     background-color: #f2f6f7;
+    font-family: 'Josefin Sans', Arial, sans-serif;
+
 }
 
 .footer {
