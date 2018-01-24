@@ -20,7 +20,7 @@ var fetchUser = function (email, name) { //getting data from db and then send it
 }
 
 var checkUserExist = function (emailAdd, name) { //check if the user exist if not send to a function that open a user
-    if (user==undefined){
+    if (user==""){
         openUser(emailAdd, name);
     }
     else if (emailAdd.toLowerCase() == user.email) {
