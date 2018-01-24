@@ -19,20 +19,6 @@ var Trip = require('./models/models').trip;
 var Todo = require('./models/models').todo;
 
 // 1) if email exists - send user object; if not - send undefined
-// app.get('/authorisation/:email', function (req, res) {
-//   var email = req.params.email;
-//   User.find({ 'email': email }, function (err, data) {
-//     if (err) throw err;
-//     if (!data.length) res.send(undefined); // no such user
-//     if (!data[0].trips.length) res.send(data[0]); // user exists but has no trips
-//     data[0].populate('trips', function (err, updUser) { // user has trips
-//       if (err) throw err;
-//       res.send(updUser);
-//     })
-//   })
-// })
-
-// 1) if email exists - send user object; if not - send undefined
 app.get('/authorisation/:email', function (req, res) {
   var email = req.params.email;
   User.find({ 'email': email }, function (err, data) {
@@ -55,8 +41,6 @@ app.get('/authorisation/:email', function (req, res) {
     })
   })
 })
-
-
 
 // 2) to handle adding a new user - returns newly created object
 app.post('/users/signup', function (req, res) {
