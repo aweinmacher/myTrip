@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/tripDB', { useMongoClient: true }, function (err, db) {
+mongoose.connect('mongodb://localhost/tripDB', function (err, db) {
   if (err) { console.log("database is not connected !") };
   if (db) { console.log("Database connected Successfully") }
 });
@@ -19,30 +19,45 @@ var Trip = require('./models/models').trip;
 var Todo = require('./models/models').todo;
 
 // 1) if email exists - send user object; if not - send empty array
-// first populate needed trips, than - user
 // app.get('/authorisation/:email', function (req, res) {
 //   var email = req.params.email;
-//     User.find({ 'email': email }, function (err, data) {
+//   User.find({ 'email': email }, function (err, data) {
 //     if (err) throw err;
-//     data[0].populate('trips', function (err, user) {
+//     if (!data.length) res.send(undefined); // no such user
+//     if (!data[0].trips.length) res.send(data[0]); // user exists but has no trips
+//     data[0].populate('trips', function (err, updUser) { // user has trips
 //       if (err) throw err;
-//       user.populate(trips, { path: 'todos' }, function (err, pop) {
-//         res.send(pop);
-//       })
+//       res.send(updUser);
 //     })
 //   })
 // })
+
+// POPULATING AN ARRAY OF DOCUMENTS
+// Critic.find(function(err, critics) {
+//     //now we have an array of critics
+//     Critic.populate(critics, { path: 'reviews' }, function(err, data) {
+//       //now data is an array of populated critics
+//       console.log(data);
+//     });
+//   });
+
 
 app.get('/authorisation/:email', function (req, res) {
   var email = req.params.email;
   User.find({ 'email': email }, function (err, data) {
     if (err) throw err;
-    else if (data.length) {
-      data[0].populate('trips', function (err, pop) {
+    if (!data.length) res.send(undefined); // no such user
+    if (!data[0].trips.length) res.send(data[0]); // user exists but has no trips
+    data[0].populate('trips', function (err, updUser) { // user has trips and we populate them
+      if (err) throw err;
+      Trip.find({ "user": updUser._id }, function (err, myTrips) { // now we have an array of trips
         if (err) throw err;
-        res.send(pop);
+        Trip.populate(myTrips, { path: 'todos', multi:true }, function (err, tripWithTodos) {
+          if (err) throw err;
+          res.send({'user': updUser, "hisTrips": tripWithTodos});
+        })
       })
-    } else res.send(data[0]);
+    })
   })
 })
 
