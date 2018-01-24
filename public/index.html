@@ -79,7 +79,7 @@
             <div class="form-group">
               <!-- Button -->
               <div class="col-sm-12 controls">
-                <button type="button" id="signIn" class="btn btn-primary pull-right">
+                <button type="button" id="signIn" class="btn btn-login pull-right">
                   <i class="glyphicon glyphicon-log-in"></i> Sign in</button>
               </div>
             </div>
@@ -92,17 +92,18 @@
 
 
   <!-- CHOOSE COUNTRY !-->
-  <div class="container">
-    <form class="post-form choosecountry">
+  <div class="container choosecountry">
+    <form class="post-form">
       <h1 class="hellouser"></h1>
       <h3>Time to choose your destination</h3>
       <div class="input-group">
         <span class="input-group-addon">
-          <i class="glyphicon glyphicon-user"></i>
+          <i class="glyphicon glyphicon-globe"></i>
         </span>
-        <input class="form-control" type="text" id="country" placeholder="Country is:" />
-        <div class="countrynotfound"><span class="error text-danger">Country Not Found</span></div>
+        <input class="form-control" type="text" id="country" placeholder="Country is: "/>
       </div>
+      <div class="countrynotfound"><span class="error text-danger">      <i class="glyphicon glyphicon-alert"></i>
+        Country Not Found</span></div>
       <button type="button" id="submitcountry" class="btn btn-primary">Submit</button>
     </form>
   </div>
@@ -127,7 +128,7 @@
   </div>
 
   <!-- .container -->
-  <div class="container">
+  <div class="container footer">
     <footer class="footer-text">
       <p>MyTrip© 2018 - Elevation Bootcamp</p>
     </footer>
