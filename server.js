@@ -18,7 +18,7 @@ var User = require('./models/models').user;
 var Trip = require('./models/models').trip;
 var Todo = require('./models/models').todo;
 
-// 1) if email exists - send user object; if not - send empty array
+// 1) if email exists - send user object; if not - send undefined
 // app.get('/authorisation/:email', function (req, res) {
 //   var email = req.params.email;
 //   User.find({ 'email': email }, function (err, data) {
@@ -32,16 +32,7 @@ var Todo = require('./models/models').todo;
 //   })
 // })
 
-// POPULATING AN ARRAY OF DOCUMENTS
-// Critic.find(function(err, critics) {
-//     //now we have an array of critics
-//     Critic.populate(critics, { path: 'reviews' }, function(err, data) {
-//       //now data is an array of populated critics
-//       console.log(data);
-//     });
-//   });
-
-
+// 1) if email exists - send user object; if not - send undefined
 app.get('/authorisation/:email', function (req, res) {
   var email = req.params.email;
   User.find({ 'email': email }, function (err, data) {
@@ -52,15 +43,18 @@ app.get('/authorisation/:email', function (req, res) {
       if (err) throw err;
       Trip.find({ "user": updUser._id }, function (err, myTrips) { // now we have an array of trips
         if (err) throw err;
-        Trip.populate(myTrips, { path: 'todos', multi:true }, function (err, tripWithTodos) {
+        Trip.populate(myTrips, { path: 'todos', multi:true}, function (err, tripWithTodos) {
           if (err) throw err;
-          res.send({'user': updUser, "hisTrips": tripWithTodos});
+          res.send({
+            '_id': updUser.id,
+            'name': updUser.name,
+            'email': updUser.email,
+            "trips": tripWithTodos});
         })
       })
     })
   })
 })
-
 
 
 
@@ -123,9 +117,6 @@ app.post('/users/:userId/trips/:tripId/todos', function (req, res) {
     })
   })
 })
-
-
-
 
 
 // 5) to handle deleting a country
