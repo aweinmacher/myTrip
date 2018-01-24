@@ -1,4 +1,4 @@
-var user ={};
+var user = {};
 
 
 var fetchUser = function (email, name) { //getting data from db and then send it to a function to comare the data if the user exist 
@@ -20,7 +20,7 @@ var fetchUser = function (email, name) { //getting data from db and then send it
 }
 
 var checkUserExist = function (emailAdd, name) { //check if the user exist if not send to a function that open a user
-    if (user==""){
+    if (user == "") {
         openUser(emailAdd, name);
     }
     else if (emailAdd.toLowerCase() == user.email) {
@@ -34,10 +34,11 @@ var checkUserExist = function (emailAdd, name) { //check if the user exist if no
     }
 }
 
-function openUser(email, name) { // send the data to open a user in the db and call a function to get the user from the db
-    var dataToSend={
-        name: name,
-        email: email.toLowerCase()
+function openUser(emailAdd, firstname) { // send the data to open a user in the db and call a function to get the user from the db
+    var dataToSend = {
+        name: firstname,
+        email: emailAdd.toLowerCase(),
+        trips: []
     }
     var path = '/users/signup';
     $.ajax({
@@ -65,9 +66,9 @@ $('#signIn').on('click', function () {
     var email = $('#eMail');
     var emailAdd = email.val();
     if (email.val() === "" || name.val() === "") {
-        alert("please enter your name and email!");
+        $('.loginreq').toggle()
     } else {
-        fetchUser(email.val(), name.val());
+        fetchUser(emailAdd, name.val());
         $('.signingin').toggle();
         name.val("");
         email.val("");
