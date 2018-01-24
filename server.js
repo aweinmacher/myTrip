@@ -27,7 +27,6 @@ app.get('/authorisation/:email', function (req, res) {
       if (err) throw err;
       res.send(pop);
     })
-    // res.send(data);
   })
 })
 
@@ -55,7 +54,7 @@ app.post('/users/:userId/trips', function (req, res) {
     });
     newTrip.save(function(err, newTrip) {
       if (err) {console.error(err); res.sendStatus(500).send(err); return; }
-      data.trips.push(newTrip);
+      data.trips.push(newTrip._id);
       data.save(function (err, us) {
         if (err) {console.error(err); res.sendStatus(500).send(err); return; }
         us.populate('trips', function (err, pop) {
@@ -69,15 +68,28 @@ app.post('/users/:userId/trips', function (req, res) {
 
 
 // 4) to handle adding a todo
-// app.post('/users/:userId/trips/:tripId', function (req, res) {
-//   var userId = req.params.userId;
-//   var tripId = req.params.tripId;
-//   User.findById(userId, function (err, user) {
-//     if (err) throw err;
-//     console.log(user);
-//     res.send(user);
-//   })
-// })
+app.post('/users/:userId/trips/:tripId/todos', function (req, res) {
+  // var userId = req.params.userId;
+  var tripId = req.params.tripId;
+  Trip.findById(tripId, function(err, trip){
+    if (err) {console.error(err); res.sendStatus(500).send(err); return; }
+    var newTodo = new Todo({
+      user: trip.user,
+      text: req.body.text
+    })
+    newTodo.save(function(err, todo) {
+      if (err) {console.error(err); res.sendStatus(500).send(err); return; }
+      trip.todos.push(todo._id);
+      trip.save(function(err, updTrip){
+        if (err) {console.error(err); res.sendStatus(500).send(err); return; }
+        updTrip.populate('todos', function (err, pop){
+          if (err) throw err;
+          res.send(pop);
+        })
+      })
+    })
+  })
+})
 
 
 
