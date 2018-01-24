@@ -13,15 +13,16 @@ body {
 
 h1 {
     color: #1b1818;
+    font-family: 'Josefin Sans', Arial, sans-serif;
 }
 
 h3 {
     color: #1b1818;
+    font-family: Oswald, Arial, serif
 }
 
 .mytrip-logo {
-     height: 50px; 
-     padding-right: 40px; 
+     height: 60px;  
     }
 
 .flag {
@@ -38,12 +39,33 @@ h3 {
     display: none
 }
 
+.countrynotfound {
+    display: none
+}
+
 .features {
     display: none
 }
 
 
+.navbar {
+    opacity: 1;
+    background-color: #f2f6f7;
+}
 
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    background-color: transparent;
+
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #1b1818;
+    font-size: 20px;
+}
+
+.nav>li>a {
+    padding: 20px 140px;
+}
 
 #loginbox {
     margin-top: 30px;
@@ -75,10 +97,7 @@ h3 {
     font-weight: 600;
     text-align: center;
     color: #1b1818;
-    margin-top: 5%;
     text-transform: uppercase;
     letter-spacing: 4px;
-    text-shadow: -1px 1px 0 #0a0e27, -1px 2px 0 #6b708d
-
 }
 
