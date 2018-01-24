@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+//,{ usePushEach: true } - supposed for subdocs but just in case...
 
 var userSchema = new Schema({
     name: String,
@@ -25,7 +26,7 @@ var tripSchema = new Schema({
     },
     todos: [{type: Schema.Types.ObjectId, ref: 'Todo'}]
 });
-//,{ usePushEach: true }
+
 
 var todoSchema = new Schema({
     user: {type: Schema.Types.ObjectId, ref: 'User'},
