@@ -68,6 +68,7 @@ $('#signIn').on('click', function () {
         alert("please enter your name and email!");
     } else {
         fetchUser(email.val(), name.val());
+        $('.signingin').toggle();
         name.val("");
         email.val("");
     }
