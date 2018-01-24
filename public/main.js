@@ -7,7 +7,7 @@ var fetchUser = function (email, name) { //getting data from db and then send it
         url: '/authorisation/' + email,
         success: function (data) {
             console.log("fetchUser successfully");
-            user = data[0];
+            user = data;
         },
         complete: function () {
             console.log(user);
@@ -75,13 +75,7 @@ $('#signIn').on('click', function () {
 
 
 
-$('#submitcountry').on('click', function () {
-    var country = $('#country');
-    console.log(country.val());
-    $('.choosecountry').toggle();
-    $('.search-result').toggle();
-    $('.features').toggle();
-})
+
 
 
 

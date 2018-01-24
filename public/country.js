@@ -13,8 +13,10 @@ var fetchCountryData = function (country) { //get the country data from the api
             console.log(data);
             saveData(data);
             fetchWheather(data.basic.capital.name);
+            toggleEnterce();
         },
         error: function (jqXHR, textStatus, errorThrown) {
+            $('.countrynotfound').toggle();
             console.log(textStatus);
         }
     });
@@ -26,11 +28,12 @@ var fetchWheather = function (city) { //get the weather data from the api
         url: 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&appid=d703871f861842b79c60988ccf3b17ec',
         success: function (data) {
              wheather= data.main.temp.toFixed(0);
-             fahrenheit = (wheather * 9 / 5 + 32).toFixed(0)
+             fahrenheit = (wheather * 9 / 5 + 32).toFixed(0);
              renderInfo();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus);
+            
         }
     });
     
@@ -60,6 +63,14 @@ function renderInfo(){ //display the data in html by handelbars
 $("#submitcountry").click(function () {
     var country = $("#country").val();
     fetchCountryData(country);
+    //console.log(country.val());
+
 });
+
+ function toggleEnterce(){
+    $('.choosecountry').toggle();
+    $('.search-result').toggle();
+    $('.features').toggle();
+ }
 
 
