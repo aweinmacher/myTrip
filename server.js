@@ -27,7 +27,6 @@ app.get('/authorisation/:email', function (req, res) {
       if (err) throw err;
       res.send(pop);
     })
-    // res.send(data);
   })
 })
 
