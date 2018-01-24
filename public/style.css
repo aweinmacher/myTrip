@@ -27,6 +27,7 @@ h3 {
     }
 
 .flag {
+    margin-top: 10px;
     height: 60px;
 }
  
@@ -38,6 +39,14 @@ h3 {
 }
 .btn-login:hover {
     color: rgb(115, 150, 75);
+}
+
+.signingin {
+    display:none;
+}
+
+.searchingcountry{
+    display: none;
 }
 
 .btn-search {
@@ -53,9 +62,6 @@ h3 {
     color: rgb(115, 150, 75);
 }
 
-
-
-
 .choosecountry {
     display: none;
     box-shadow: 0 0 30px black;
@@ -63,6 +69,7 @@ h3 {
 
 .weather {
     box-shadow: 0 0 30px black;
+    /* box-shadow: 0px 1px 10px 0px rgba(207,207,207,1); */
 }
 .search-result {
     display: none
@@ -84,7 +91,8 @@ h3 {
 
 
 .features {
-    display: none
+    display: none;
+    margin-top: 30px;
 }
 
 
@@ -152,3 +160,31 @@ h3 {
     letter-spacing: 4px;
 }
 
+
+
+
+
+
+
+
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -ms-animation: spin .7s infinite linear;
+    -webkit-animation: spinw .7s infinite linear;
+    -moz-animation: spinm .7s infinite linear;
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+  
+@-webkit-keyframes spinw {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes spinm {
+    from { -moz-transform: rotate(0deg);}
+    to { -moz-transform: rotate(360deg);}
+}
