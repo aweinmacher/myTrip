@@ -5,7 +5,7 @@ var userSchema = new Schema({
     name: String,
     email: String,
     trips: [{type: Schema.Types.ObjectId, ref: 'Trip'}]
-},{ usePushEach: true });
+});
 
 var tripSchema = new Schema({
     user: {type: Schema.Types.ObjectId, ref: 'User'},
@@ -24,16 +24,17 @@ var tripSchema = new Schema({
         }
     },
     todos: [{type: Schema.Types.ObjectId, ref: 'Todo'}]
-},{ usePushEach: true });
+});
+//,{ usePushEach: true }
 
 var todoSchema = new Schema({
     user: {type: Schema.Types.ObjectId, ref: 'User'},
     text: String
-},{ usePushEach: true });
+});
 
+var Todo = mongoose.model('Todo', todoSchema);
 var User = mongoose.model('User', userSchema);
 var Trip = mongoose.model('Trip', tripSchema);
-var Todo = mongoose.model('Todo', todoSchema);
 
 module.exports.user = User;
 module.exports.trip = Trip;

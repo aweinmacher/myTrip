@@ -18,12 +18,16 @@ var User = require('./models/models').user;
 var Trip = require('./models/models').trip;
 var Todo = require('./models/models').todo;
 
-// 1) if email exists - send user object; if not - senf empty array
+// 1) if email exists - send user object; if not - send empty array
 app.get('/authorisation/:email', function (req, res) {
   var email = req.params.email;
   User.find({ 'email': email }, function (err, data) {
     if (err) throw err;
-    else res.send(data);
+    data[0].populate('trips', function (err, pop) {
+      if (err) throw err;
+      res.send(pop);
+    })
+    // res.send(data);
   })
 })
 
@@ -49,33 +53,41 @@ app.post('/users/:userId/trips', function (req, res) {
       'user': data._id,
       'country': req.body.country
     });
-    newTrip.save();
-    console.log(newTrip);
-    data.trips.push(newTrip);
-    data.save(function (err, data) {
-      if (err) throw err;
-      data.populate('trips', function (err, pop) {
-        if (err) throw err;
-        res.send(pop);
+    newTrip.save(function(err, newTrip) {
+      if (err) {console.error(err); res.sendStatus(500).send(err); return; }
+      data.trips.push(newTrip);
+      data.save(function (err, us) {
+        if (err) {console.error(err); res.sendStatus(500).send(err); return; }
+        us.populate('trips', function (err, pop) {
+          if (err) throw err;
+          res.send(pop);
+        })
       })
     })
   })
 })
 
 
-// 4) to handle deleting a country
+// 4) to handle adding a todo
+// app.post('/users/:userId/trips/:tripId', function (req, res) {
+//   var userId = req.params.userId;
+//   var tripId = req.params.tripId;
+//   User.findById(userId, function (err, user) {
+//     if (err) throw err;
+//     console.log(user);
+//     res.send(user);
+//   })
+// })
 
-// 5) to handle adding a todo
 
+
+
+
+// 5) to handle deleting a country
 // 6) to handle deleting a todo
+// 7) to handle getting all todos for a certain country
 
-// 6) to handle getting all todos for a certain country
-
-
-
-
-
-// RUN ONLY ONCE ---- CREATION CODE !!! CREATION CODE !!! CREATION CODE !!! CREATION CODE
+// RUN ONLY ONCE ---- CREATION CODE !!! CREATION CODE !!! CREATION CODE !!! CREATION CODE !!! CREATION CODE
 // var user1 = new User({
 //   name: 'User 1',
 //   email: 'user@gmail.com',
