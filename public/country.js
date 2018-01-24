@@ -29,6 +29,7 @@ var fetchWheather = function (city) { //get the weather data from the api
         success: function (data) {
              wheather= data.main.temp.toFixed(0);
              fahrenheit = (wheather * 9 / 5 + 32).toFixed(0);
+             weathericon = data.weather[0].icon
              renderInfo();
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -53,6 +54,7 @@ function saveData(data){ //save the data of the country
 function renderInfo(){ //display the data in html by handelbars
     country.tempc = wheather
     country.far = fahrenheit
+    country.icon = weathericon
     var source = $('#post-item').html();
     var template = Handlebars.compile(source);
     $(".search-result").empty();
@@ -63,8 +65,8 @@ function renderInfo(){ //display the data in html by handelbars
 $("#submitcountry").click(function () {
     var country = $("#country").val();
     fetchCountryData(country);
+    $('.searchingcountry').toggle()
     //console.log(country.val());
-
 });
 
  function toggleEnterce(){
@@ -73,4 +75,9 @@ $("#submitcountry").click(function () {
     $('.features').toggle();
  }
 
+
+function toggleBookFlight(){ 
+    console.log("user wants to book a flight")
+    $('.bookflight').toggle();
+}
 

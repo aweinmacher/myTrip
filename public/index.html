@@ -138,7 +138,10 @@
 
   <!-- SHOW COUNTRY INFO !-->
   <div class="container search-result">
-
+<!-- 
+    <div class="bookflight">
+        <div id="searchWidget"><iframe id="widgetIframe" src="https://www.expedia.com/marketing/widgets/widget?wtt=1&tp1=4b3acf43-5448-4e78-9005-caa394af21ac&tp2=&lob=H,FH,F&des={{capital}}&sfs=3&wbi=10&olc=000000&whf=1&hfc=C7C7C7&wif=2&ifc=000000&wbc=FFCB00&wbf=1&bfc=3D3100&wws=2" width="250px" height="250px" scrolling="no" frameborder="0"></iframe></div>
+    </div> -->
   </div>
 
   <div class="container features">
@@ -162,22 +165,20 @@
   </div>
 
   <script id="post-item" type="text/x-handlebars-template">
-      <div class="row" data-name="{{name}}">
+      <div class="row datacard" data-name="{{name}}">
           <div class="col-md-4 weather" data-name="{{name}}">
             <h1>Current Temperature:</h1>
-            <img src="http://openweathermap.org/img/w/{{icon}}.png">
-          <h2> {{tempc}} &#8451; </h2>
-          <h2> {{far}} &#x2109;</h2>
+            
+          <h2><img src="http://openweathermap.org/img/w/{{icon}}.png"> {{tempc}} &#8451; | {{far}} &#x2109;</h2>
           </div>
           <div class="col-md-8 countryinfo" data-name="{{name}}">
-          <img class="flag" src={{flagLink}}>
-          <h1 id="countryname">Country: {{name}}</h1>
-          <h3 id="continent">Continent: {{continent}} </h3>
-          <h3 id="capital">Capital: {{capital}} </h3>
-          <p class="info">Language:{{#each languages}} {{this.name}} {{/each}}  , <a href="{{wikipediaLink}}">Wikipedia Link</a>
-          </p>
+              <img class="flag" src={{flagLink}}>
+              <h1 class="countryname">Country: {{name}}</h1>
+          <h3 class="capital">Continent: {{continent}} | Capital: {{capital}} </h3>
+          <h3 class="info">Language:{{#each languages}} {{this.name}} {{/each}}  , <a href="{{wikipediaLink}}">Wikipedia Link</h3>
       </div>
   </script>
+  
   <script type="text/javascript" src="jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="handlebars/dist/handlebars.min.js"></script>
