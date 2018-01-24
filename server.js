@@ -19,16 +19,35 @@ var Trip = require('./models/models').trip;
 var Todo = require('./models/models').todo;
 
 // 1) if email exists - send user object; if not - send empty array
+// first populate needed trips, than - user
+// app.get('/authorisation/:email', function (req, res) {
+//   var email = req.params.email;
+//     User.find({ 'email': email }, function (err, data) {
+//     if (err) throw err;
+//     data[0].populate('trips', function (err, user) {
+//       if (err) throw err;
+//       user.populate(trips, { path: 'todos' }, function (err, pop) {
+//         res.send(pop);
+//       })
+//     })
+//   })
+// })
+
 app.get('/authorisation/:email', function (req, res) {
   var email = req.params.email;
   User.find({ 'email': email }, function (err, data) {
     if (err) throw err;
-    data[0].populate('trips', function (err, pop) {
-      if (err) throw err;
-      res.send(pop);
-    })
+    else if (data.length) {
+      data[0].populate('trips', function (err, pop) {
+        if (err) throw err;
+        res.send(pop);
+      })
+    } else res.send(data[0]);
   })
 })
+
+
+
 
 // 2) to handle adding a new user - returns newly created object
 app.post('/users/signup', function (req, res) {
@@ -52,11 +71,11 @@ app.post('/users/:userId/trips', function (req, res) {
       'user': data._id,
       'country': req.body.country
     });
-    newTrip.save(function(err, newTrip) {
-      if (err) {console.error(err); res.sendStatus(500).send(err); return; }
+    newTrip.save(function (err, newTrip) {
+      if (err) { console.error(err); res.sendStatus(500).send(err); return; }
       data.trips.push(newTrip._id);
       data.save(function (err, us) {
-        if (err) {console.error(err); res.sendStatus(500).send(err); return; }
+        if (err) { console.error(err); res.sendStatus(500).send(err); return; }
         us.populate('trips', function (err, pop) {
           if (err) throw err;
           res.send(pop);
@@ -67,22 +86,21 @@ app.post('/users/:userId/trips', function (req, res) {
 })
 
 
-// 4) to handle adding a todo
+// 4) to handle adding a todo - returns a trip object
 app.post('/users/:userId/trips/:tripId/todos', function (req, res) {
-  // var userId = req.params.userId;
   var tripId = req.params.tripId;
-  Trip.findById(tripId, function(err, trip){
-    if (err) {console.error(err); res.sendStatus(500).send(err); return; }
+  Trip.findById(tripId, function (err, trip) {
+    if (err) { console.error(err); res.sendStatus(500).send(err); return; }
     var newTodo = new Todo({
       user: trip.user,
       text: req.body.text
     })
-    newTodo.save(function(err, todo) {
-      if (err) {console.error(err); res.sendStatus(500).send(err); return; }
+    newTodo.save(function (err, todo) {
+      if (err) { console.error(err); res.sendStatus(500).send(err); return; }
       trip.todos.push(todo._id);
-      trip.save(function(err, updTrip){
-        if (err) {console.error(err); res.sendStatus(500).send(err); return; }
-        updTrip.populate('todos', function (err, pop){
+      trip.save(function (err, updTrip) {
+        if (err) { console.error(err); res.sendStatus(500).send(err); return; }
+        updTrip.populate('todos', function (err, pop) {
           if (err) throw err;
           res.send(pop);
         })
