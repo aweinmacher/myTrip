@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/tripDB', { useMongoClient: true }, function (err, db) {
+mongoose.connect('mongodb://localhost/tripDB', function (err, db) {
   if (err) { console.log("database is not connected !") };
   if (db) { console.log("Database connected Successfully") }
 });
@@ -18,34 +18,43 @@ var User = require('./models/models').user;
 var Trip = require('./models/models').trip;
 var Todo = require('./models/models').todo;
 
-// 1) if email exists - send user object; if not - send empty array
-// first populate needed trips, than - user
+// 1) if email exists - send user object; if not - send undefined
 // app.get('/authorisation/:email', function (req, res) {
 //   var email = req.params.email;
-//     User.find({ 'email': email }, function (err, data) {
+//   User.find({ 'email': email }, function (err, data) {
 //     if (err) throw err;
-//     data[0].populate('trips', function (err, user) {
+//     if (!data.length) res.send(undefined); // no such user
+//     if (!data[0].trips.length) res.send(data[0]); // user exists but has no trips
+//     data[0].populate('trips', function (err, updUser) { // user has trips
 //       if (err) throw err;
-//       user.populate(trips, { path: 'todos' }, function (err, pop) {
-//         res.send(pop);
-//       })
+//       res.send(updUser);
 //     })
 //   })
 // })
 
+// 1) if email exists - send user object; if not - send undefined
 app.get('/authorisation/:email', function (req, res) {
   var email = req.params.email;
   User.find({ 'email': email }, function (err, data) {
     if (err) throw err;
-    else if (data.length) {
-      data[0].populate('trips', function (err, pop) {
+    if (!data.length) res.send(undefined); // no such user
+    if (!data[0].trips.length) res.send(data[0]); // user exists but has no trips
+    data[0].populate('trips', function (err, updUser) { // user has trips and we populate them
+      if (err) throw err;
+      Trip.find({ "user": updUser._id }, function (err, myTrips) { // now we have an array of trips
         if (err) throw err;
-        res.send(pop);
+        Trip.populate(myTrips, { path: 'todos', multi:true}, function (err, tripWithTodos) {
+          if (err) throw err;
+          res.send({
+            '_id': updUser.id,
+            'name': updUser.name,
+            'email': updUser.email,
+            "trips": tripWithTodos});
+        })
       })
-    } else res.send(data[0]);
+    })
   })
 })
-
 
 
 
@@ -108,9 +117,6 @@ app.post('/users/:userId/trips/:tripId/todos', function (req, res) {
     })
   })
 })
-
-
-
 
 
 // 5) to handle deleting a country
