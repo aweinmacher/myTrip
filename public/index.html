@@ -88,7 +88,9 @@
               <!-- Button -->
               <div class="col-sm-12 controls">
                 <button type="button" id="signIn" class="btn btn-login pull-right">
-                  <i class="glyphicon glyphicon-log-in"></i> Sign in</button>
+                  <i class="glyphicon glyphicon-log-in"></i> Sign in
+                  <span class="signingin glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                </button>
               </div>
             </div>
           </form>
@@ -118,14 +120,18 @@
       </div> -->
 
       <div class="countrynotfound text-center alert-danger  fade in">
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          <strong><i class="glyphicon glyphicon-alert"></i> Country Not Found</strong></div>
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>
+          <i class="glyphicon glyphicon-alert"></i> Country Not Found</strong>
+      </div>
 
 
 
       <div class="text-center">
-      <button type="button" id="submitcountry" class="btn btn-search">Search</button>
-    </div>
+        <button type="button" id="submitcountry" class="btn btn-search">Search
+            <span class="searchingcountry glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+        </button>
+      </div>
     </form>
   </div>
 
@@ -159,6 +165,7 @@
       <div class="row" data-name="{{name}}">
           <div class="col-md-4 weather" data-name="{{name}}">
             <h1>Current Temperature:</h1>
+            <img src="http://openweathermap.org/img/w/{{icon}}.png">
           <h2> {{tempc}} &#8451; </h2>
           <h2> {{far}} &#x2109;</h2>
           </div>
