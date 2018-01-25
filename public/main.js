@@ -59,9 +59,12 @@ function openUser(emailAdd, firstname) { // send the data to open a user in the 
 }
 
 
+$('.mytrip-logo').on('click', function(){
+    window.location.reload()
+})
+
 
 $('#signIn').on('click', function () {
-
     var name = $('#userName');
     var email = $('#eMail');
     var emailAdd = email.val();
