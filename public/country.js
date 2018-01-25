@@ -104,7 +104,7 @@ $("#submitcountry").click(function () {
     for (var i = 0; i < user.trips.length; i++) {
         if (user.trips[i].country == countryname) {
             fetchCountryData(countryname);
-            break
+            return
         }
     }
 
@@ -114,7 +114,7 @@ $("#submitcountry").click(function () {
             addCountryToUser(countryname, userId, emailAdd)
             fetchCountryData(countryname);
             $('.searchingcountry').toggle()
-            break
+            return
         // if country is not found display error message
         // } else {
         //     $('.countryreq').show()     
