@@ -9,7 +9,7 @@ function addToDo(input) {// get user id and input of to do send to the server to
             console.log(`to do have saved`);
         },
         complete: function () {
-            fetchUser(user.email, user.name);
+            fetchDataToDo(user.email, user.name);
             console.log(user);
             //renderToDo();
         },
@@ -18,6 +18,25 @@ function addToDo(input) {// get user id and input of to do send to the server to
         }
     })
 }
+
+function fetchDataToDo(email, name) {
+    $.ajax({
+        method: "GET",
+        url: '/authorisation/' + email,
+        success: function (data) {
+            console.log("fetchUser successfully");
+            user = data;
+        },
+        complete: function () {
+            console.log(user);
+            renderToDo();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+        }
+    })
+}
+
 
 function renderToDo() {
     for (var i = 0; i < user.trips.length; i++) {
@@ -38,13 +57,13 @@ function renderToDo() {
 
 $('.submitToDo').on('click', function () { //click on the to do button get the data from the form 
     var toDoInput = $("#todoInput").val();
-    
+
     if (toDoInput === "") {
         alert("please enter a valid To Do");
     } else {
         console.log('here2');
         addToDo(toDoInput);
-        
+
     }
 })
 

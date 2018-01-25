@@ -30,7 +30,7 @@ var checkUserExist = function (emailAdd, name) { //check if the user exist if no
    else if (emailAdd.toLowerCase() == user.email) {
        console.log("user found")
        console.log(user);
-       $('.username-form').toggle();
+       $('.username-form').hide();
        // $('.choosecountry').toggle();
        var name = user.name;
        var hello = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
@@ -114,6 +114,7 @@ $('.hello').on('click', '.existCountry', function(){
    fetchCountryData(countryName);
    renderToDo();   
    $('.features').show();
+   $('.featuresBar').show();
 
 
 })
