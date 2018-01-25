@@ -155,13 +155,25 @@
         <div id="searchWidget"><iframe id="widgetIframe" src="https://www.expedia.com/marketing/widgets/widget?wtt=1&tp1=4b3acf43-5448-4e78-9005-caa394af21ac&tp2=&lob=H,FH,F&des={{capital}}&sfs=3&wbi=10&olc=000000&whf=1&hfc=C7C7C7&wif=2&ifc=000000&wbc=FFCB00&wbf=1&bfc=3D3100&wws=2" width="250px" height="250px" scrolling="no" frameborder="0"></iframe></div>
     </div> -->
   </div>
-
+ 
   <div class="container features">
     <div class="row text-center">
       <div class="btn-group" role="group" aria-label="Features">
         <button type="button" class="btn btn-info">Add flight details</button>
-        <button type="button" class="btn btn-info">Add wish to do list</button>
+        <button type="button" class="btn btn-info toDoBtn">Add wish to do list</button>
         <button type="button" class="btn btn-info">Add another country</button>
+      </div>
+      <div class="row text-center toDodiv">
+          <div class="toDo" >
+            <ul>
+            <li><p style="font-size:25px"><strong><u>Wish To Do list:</u></strong></p></li>
+            <li><p style="font-size:20px"><strong>Sight-Seeing</strong></p></li>
+            <li><p style="font-size:20px"><strong>Snorkling</strong></p></li>
+            <li><p style="font-size:20px"><strong>Night-Life</strong></p></li>
+            </ul>
+            <input type="text" id="todoInput" placeholder="I wish to... " />
+            <span><button type="button" class="btn btn-primary submitToDo">Add to list</button></span>
+          </div>
       </div>
       <div class="row text-center">
         <button type="button" class="btn btn-success">SAVE</button>

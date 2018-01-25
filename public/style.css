@@ -173,12 +173,18 @@ h3 {
     letter-spacing: 4px;
 }
 
+.toDo {
+    display: none;
+}
+
+
 
 /* Hello */
 .hello {
     border: 0;
     display: none;
 }
+
 
 .glyphicon-refresh-animate {
     -animation: spin .7s infinite linear;
