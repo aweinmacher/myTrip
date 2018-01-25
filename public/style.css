@@ -180,10 +180,6 @@ h3 {
     display: none;
 }
 
-
-
-
-
 .glyphicon-refresh-animate {
     -animation: spin .7s infinite linear;
     -ms-animation: spin .7s infinite linear;
