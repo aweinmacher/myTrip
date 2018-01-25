@@ -1,5 +1,5 @@
 body {
-    overflow: hidden;
+    overflow: auto;
     font-family: Roboto, Arial, sans-serif;
     padding-top: 50px;
     background: url('images/backgroundpicture.jpeg') fixed;
@@ -23,7 +23,7 @@ h3 {
 }
 
 .mytrip-logo {
-     height: 60px;  
+     height: 100%;  
     }
 
 .flag {
@@ -130,9 +130,11 @@ h3 {
     font-size: 20px;
 }
 
-.nav>li>a {
+/* .nav>li>a {
     padding: 20px 159px;
-}
+} */
+
+
 
 #submitcountry {
     margin-top: 5%;
@@ -183,6 +185,8 @@ h3 {
 .hello {
     border: 0;
     display: none;
+    box-shadow: 0 0 30px black;
+
 }
 
 
