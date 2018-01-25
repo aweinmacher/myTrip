@@ -44,7 +44,8 @@ var checkUserExist = function (emailAdd, name) { //check if the user exist if no
                $('.exTrips').append(
                    `<a class="existCountry"
                    data-tripId="${user.trips[i]._id}"
-                   data-countryName="${country}">  ${countryToShow}  </a>`);
+                   data-countryName="${country}">${countryToShow}</a>  <span class="bar">|</span>
+                   `);
            }
        } else {
            $('.choosecountry').toggle(); // if no existing trips, show the form...
@@ -108,5 +109,6 @@ $('.hello').on('click', '.existCountry', function(){
    var tripId = $(this).data().tripid;
    currentTripId = tripId;
    var countryName = $(this).data().countryname;
+   $('.choosecountry').toggle();
    fetchCountryData(countryName);
 })
