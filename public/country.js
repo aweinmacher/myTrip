@@ -42,6 +42,8 @@ var fetchCountryData = function (country) { //get the country data from the api
         url: 'https://api.thebasetrip.com/v2/countries/' + country,
         headers: {
             'Content-Type': 'application/json',
+            'Origin': 'https://mytrip-106.herokuapp.com',
+            'Access-Control-Request-Method': 'GET',
             'Accept': 'application/json',
             'x-api-key': '77c599fb9dd83623cc39879e2cd34e7d6fc3f5a60148b7faac1befca6a9c'
         },
