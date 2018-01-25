@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/tripDB', function (err, db) {
+mongoose.connect(process.env.CONNECTION_STRING||'mongodb://localhost/tripDB', function (err, db) {
   if (err) { console.log("database is not connected !") };
   if (db) { console.log("Database connected Successfully") }
 });
@@ -161,6 +161,6 @@ app.get('/wish/:tripId/:country', function(req, res){
 // ADD ERROR HANDLER - go to the first Node lesson
 
 
-app.listen(8080, function () {
+app.listen(process.env.PORT || 8080, function () {
   console.log("Server connected through port 8080");
 })
