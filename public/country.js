@@ -137,8 +137,11 @@ function renderCountries() {
 
 function toggleEnterce() {
     $('.choosecountry').toggle();
+
+
     $('.search-result').show();
 }
+
 
 function toggleBookFlight() {
     console.log("user wants to book a flight")

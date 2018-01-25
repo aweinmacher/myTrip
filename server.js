@@ -85,7 +85,7 @@ app.post('/users/:userId/trips/:tripId/todos', function (req, res) {
   Trip.findById(tripId, function (err, trip) {
     if (err) { console.error(err); res.sendStatus(500).send(err); return; }
     var newTodo = new Todo({
-      user: trip.user,
+      user: trip.user, 
       text: req.body.text
     })
     newTodo.save(function (err, todo) {
