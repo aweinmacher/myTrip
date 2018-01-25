@@ -1,8 +1,20 @@
 var country={}, wheather, fahrenheit; //object for the info and var for the tempreture
 
+var fetchUserForCountry = function (emailAdd) { //getting data from db after user added country
+    $.ajax({
+        method: "GET",
+        url: '/authorisation/' + emailAdd,
+        success: function (data) {
+            console.log("fetchUser successfully");
+            user = data;
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+        }
+    })
+}
 
-
-function addCountryToUser(country, userid) { // send the data to open a user in the db and call a function to get the user from the db
+function addCountryToUser(country, userid, emailAdd) { // send the data to open a user in the db and call a function to get the user from the db
     var userId = userid;
     var dataToSend = {'country': country};
     var path = '/users/'+userId+'/trips';
@@ -14,6 +26,7 @@ function addCountryToUser(country, userid) { // send the data to open a user in 
         success: function (data) {
             console.log(`Added country`)
             console.log(dataToSend)
+            fetchUserForCountry(emailAdd);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus);
@@ -85,13 +98,14 @@ function renderInfo(){ //display the data in html by handelbars
 $("#submitcountry").click(function () {
     var countryname = $("#country").val().toLowerCase();
     var userId = user._id
+    var emailAdd = user.email
     for (var i = 0; i < user.trips.length; i++){
         if (user.trips[i].country == countryname) {
         fetchCountryData(countryname);
         return
         }
     }
-    addCountryToUser(countryname, userId)
+    addCountryToUser(countryname, userId, emailAdd)
     fetchCountryData(countryname);
     $('.searchingcountry').toggle()
     //console.log(country.val());
