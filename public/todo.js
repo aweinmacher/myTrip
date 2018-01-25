@@ -51,8 +51,8 @@ function renderToDo() {
             break;
         }
     }
-
 }
+
 
 
 $('.submitToDo').on('click', function () { //click on the to do button get the data from the form 
