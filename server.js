@@ -103,9 +103,21 @@ app.post('/users/:userId/trips/:tripId/todos', function (req, res) {
 })
 
 
-// 5) to handle deleting a country
-// 6) to handle deleting a todo
-// 7) to handle getting all todos for a certain country
+// find all trips with === country -> send as response
+// at ajax success data.user != user._id and push data[i].todos to some local others' todos
+
+// 5) to handle getting all todos for a certain country
+app.get('/wish/:tripId/:country', function(req, res){
+  var tripId = req.params.tripId;
+  var country = req.params.country;
+  Trip.find({'country':country}, function(err, trips){
+    if (err) { console.error(err); res.sendStatus(500).send(err); return; }
+    res.send(trips);
+  })
+})
+
+
+
 
 // RUN ONLY ONCE ---- CREATION CODE !!! CREATION CODE !!! CREATION CODE !!! CREATION CODE !!! CREATION CODE
 // var user1 = new User({
