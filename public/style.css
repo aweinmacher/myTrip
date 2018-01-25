@@ -174,7 +174,11 @@ h3 {
 }
 
 
-
+/* Hello */
+.hello {
+    border: 0;
+    display: none;
+}
 
 
 
