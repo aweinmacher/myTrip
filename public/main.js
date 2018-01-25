@@ -12,6 +12,7 @@ var fetchUser = function (email, name) { //getting data from db and then send it
        complete: function () {
            console.log(user);
            checkUserExist(email, name)
+           renderToDo();
        },
        error: function (jqXHR, textStatus, errorThrown) {
            console.log(textStatus);
@@ -111,4 +112,5 @@ $('.hello').on('click', '.existCountry', function(){
    var countryName = $(this).data().countryname;
    $('.choosecountry').toggle();
    fetchCountryData(countryName);
+   renderToDo();
 })

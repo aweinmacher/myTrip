@@ -16,30 +16,39 @@
 
 <body>
   <div class="container">
-      <nav class="navbar navbar-default  navbar-fixed-top">
-          <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#"> <img class="mytrip-logo" src="images/logo3.png"></a>
-            </div>
-        
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Intro </a></li>
-                <li><a href="#">Flight Details</a></li>
-                <li><a href="#">Wish To Do</a></li>
-              
-              </ul>
-             
-            </div>
-          </div>
-        </nav>
+    <nav class="navbar navbar-default  navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+            aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+            <img class="mytrip-logo" src="images/logo3.png">
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="#">Intro </a>
+            </li>
+            <li>
+              <a href="#">Flight Details</a>
+            </li>
+            <li>
+              <a href="#">Wish To Do</a>
+            </li>
+
+          </ul>
+
+        </div>
+      </div>
+    </nav>
   </div>
 
 
@@ -88,11 +97,11 @@
               </span>
               <input class="form-control" type="text" id="eMail" placeholder="Email" />
             </div>
-        
-        <div class="loginreq text-center alert-danger  fade in">
-          <strong>
-            <i class="glyphicon glyphicon-alert"></i> Make sure you entered your name and email </strong>
-        </div>
+
+            <div class="loginreq text-center alert-danger  fade in">
+              <strong>
+                <i class="glyphicon glyphicon-alert"></i> Make sure you entered your name and email </strong>
+            </div>
 
             <div class="form-group">
               <!-- Button -->
@@ -110,19 +119,19 @@
     </div>
   </div>
 
-  
+
   <div class="container hello">
     <h1 class="hellouser"></h1>
-     <div class="hasTrips">
-      <h1 class="exTrips"> My Trips: </h1>  
+    <div class="hasTrips">
+      <h1 class="exTrips"> My Trips: </h1>
       <button type="button" id="addtrip" class="btn btn-search">Add New Trip</button>
 
-     </div>
+    </div>
   </div>
-  
+
   <!-- CHOOSE COUNTRY !-->
   <div class="container choosecountry">
-    <form class="post-form col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">   
+    <form class="post-form col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
       <h3>Choose your destination</h3>
       <div class="input-group">
         <span class="input-group-addon">
@@ -146,7 +155,7 @@
 
       <div class="text-center">
         <button type="button" id="submitcountry" class="btn btn-search">Search
-            <span class="searchingcountry glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+          <span class="searchingcountry glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
         </button>
       </div>
     </form>
@@ -155,33 +164,32 @@
 
   <!-- SHOW COUNTRY INFO !-->
   <div class="container search-result">
-<!-- 
+    <!-- 
     <div class="bookflight">
         <div id="searchWidget"><iframe id="widgetIframe" src="https://www.expedia.com/marketing/widgets/widget?wtt=1&tp1=4b3acf43-5448-4e78-9005-caa394af21ac&tp2=&lob=H,FH,F&des={{capital}}&sfs=3&wbi=10&olc=000000&whf=1&hfc=C7C7C7&wif=2&ifc=000000&wbc=FFCB00&wbf=1&bfc=3D3100&wws=2" width="250px" height="250px" scrolling="no" frameborder="0"></iframe></div>
     </div> -->
   </div>
- 
+
   <div class="container features">
-    <div class="row text-center">
-      <div class="btn-group" role="group" aria-label="Features">
-        <button type="button" class="btn btn-info">Add flight details</button>
-        <button type="button" class="btn btn-info toDoBtn">Add wish to do list</button>
-        <button type="button" class="btn btn-info">Add another country</button>
-      </div>
-      <div class="row text-center toDodiv">
-          <div class="toDo" >
-            <ul>
-            <li><p style="font-size:25px"><strong><u>Wish To Do list:</u></strong></p></li>
-            <li><p style="font-size:20px"><strong>Sight-Seeing</strong></p></li>
-            <li><p style="font-size:20px"><strong>Snorkling</strong></p></li>
-            <li><p style="font-size:20px"><strong>Night-Life</strong></p></li>
-            </ul>
-            <input type="text" id="todoInput" placeholder="I wish to... " />
-            <span><button type="button" class="btn btn-primary submitToDo">Add to list</button></span>
-          </div>
-      </div>
+    <div class="container featuresBar">
       <div class="row text-center">
-        <button type="button" class="btn btn-success">SAVE</button>
+        <div class="btn-group" role="group" aria-label="Features">
+          <button type="button" class="btn btn-info">Add flight details</button>
+          <button type="button" class="btn btn-info toDoBtn">Add wish to do list</button>
+          <button type="button" class="btn btn-info">Add another country</button>
+        </div>
+        <div class="row text-center toDodiv">
+          <div class="toDo">
+            <div class="toDoUl"></div>
+            <input type="text" class="todoInput" id='todoInput' placeholder="I wish to... " />
+            <span>
+              <button type="button" class="btn btn-primary submitToDo">Add to list</button>
+            </span>
+          </div>
+        </div>
+        <div class="row text-center">
+          <button type="button" class="btn btn-success">SAVE</button>
+        </div>
       </div>
     </div>
   </div>
@@ -207,13 +215,21 @@
           <h3 class="info">Language:{{#each languages}} {{this.name}} {{/each}}  , <a href="{{wikipediaLink}}">Wikipedia Link</h3>
       </div>
   </script>
-  
+  <script id="post-todo" type="text/x-handlebars-template">
+    <ul>
+        {{#each todos}}
+          <li><p style="font-size:20px"><strong>{{this.text}}</strong></p></li>
+        {{/each}}
+    </ul>
+  </script>
+
+
   <script type="text/javascript" src="jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="handlebars/dist/handlebars.min.js"></script>
   <script type="text/javascript" src="main.js"></script>
   <script type="text/javascript" src="country.js"></script>
-
+  <script type="text/javascript" src="todo.js"></script>
 </body>
 
 </html>

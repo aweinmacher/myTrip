@@ -114,7 +114,7 @@ $("#submitcountry").click(function () {
  function toggleEnterce(){
     $('.choosecountry').toggle();
     $('.search-result').toggle();
-    $('.features').toggle();
+    $('.featuresBar').toggle();
  }
 
 function toggleBookFlight(){ 
