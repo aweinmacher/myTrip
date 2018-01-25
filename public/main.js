@@ -48,10 +48,7 @@ var checkUserExist = function (emailAdd, name) { //check if the user exist if no
                    data-countryName="${country}">${countryToShow}</a>  <span class="bar">|</span>
                    `);
            }
-       } else {
-           $('.choosecountry').toggle(); // if no existing trips, show the form...
-           $('.hasTrips'). toggle(); // ... and hide the trips
-       }
+       } 
    }
 }
 
@@ -103,6 +100,8 @@ $('#signIn').on('click', function () {
 
 $('#addtrip').on('click', function () {
    $('.choosecountry').toggle();
+   $('.hasTrips').show();
+
 })
 
 // When the user chooses existing trip
@@ -111,6 +110,10 @@ $('.hello').on('click', '.existCountry', function(){
    currentTripId = tripId;
    var countryName = $(this).data().countryname;
    $('.choosecountry').toggle();
+
    fetchCountryData(countryName);
-   renderToDo();
+   renderToDo();   
+   $('.features').show();
+
+
 })

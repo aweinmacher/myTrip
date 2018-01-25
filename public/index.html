@@ -122,11 +122,12 @@
 
   <div class="container hello">
     <h1 class="hellouser"></h1>
-    <div class="hasTrips">
-      <h1 class="exTrips"> My Trips: </h1>
-      <button type="button" id="addtrip" class="btn btn-search">Add New Trip</button>
 
-    </div>
+     <div class="hasTrips">
+       <h1>My Trips:</h1>
+      <h1 class="exTrips">  </h1>  
+      <button type="button" id="addtrip" class="btn btn-search">Add New Trip</button>
+     </div>
   </div>
 
   <!-- CHOOSE COUNTRY !-->
@@ -146,17 +147,14 @@
           alert-dismissable
       </div> -->
 
-      <div class="countrynotfound text-center alert-danger  fade in">
-        <strong>
-          <i class="glyphicon glyphicon-alert"></i> Country Not Found</strong>
-      </div>
-
-
-
       <div class="text-center">
         <button type="button" id="submitcountry" class="btn btn-search">Search
           <span class="searchingcountry glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
         </button>
+        <div class="countryreq text-center alert-danger  fade in">
+            <strong>
+              <i class="glyphicon glyphicon-alert"></i> Country Not Found </strong>
+          </div>
       </div>
     </form>
   </div>
@@ -230,6 +228,9 @@
   <script type="text/javascript" src="main.js"></script>
   <script type="text/javascript" src="country.js"></script>
   <script type="text/javascript" src="todo.js"></script>
+  <script type="text/javascript" src="countriesList.js"></script>
+
+
 </body>
 
 </html>

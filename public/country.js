@@ -1,4 +1,4 @@
-var country={}, wheather, fahrenheit; //object for the info and var for the tempreture
+var country = {}, wheather, fahrenheit; //object for the info and var for the tempreture
 
 var fetchUserForCountry = function (emailAdd) { //getting data from db after user added country
     $.ajax({
@@ -16,8 +16,8 @@ var fetchUserForCountry = function (emailAdd) { //getting data from db after use
 
 function addCountryToUser(country, userid, emailAdd) { // send the data to open a user in the db and call a function to get the user from the db
     var userId = userid;
-    var dataToSend = {'country': country};
-    var path = '/users/'+userId+'/trips';
+    var dataToSend = { 'country': country };
+    var path = '/users/' + userId + '/trips';
     $.ajax({
         method: "POST",
         url: path,
@@ -27,6 +27,7 @@ function addCountryToUser(country, userid, emailAdd) { // send the data to open 
             console.log(`Added country`)
             console.log(dataToSend)
             fetchUserForCountry(emailAdd);
+
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus);
@@ -38,7 +39,7 @@ function addCountryToUser(country, userid, emailAdd) { // send the data to open 
 var fetchCountryData = function (country) { //get the country data from the api
     $.ajax({
         method: "GET",
-        url: 'https://api.thebasetrip.com/v2/countries/'+country ,
+        url: 'https://api.thebasetrip.com/v2/countries/' + country,
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
@@ -47,6 +48,7 @@ var fetchCountryData = function (country) { //get the country data from the api
         success: function (data) {
             saveData(data);
             fetchWheather(data.basic.capital.name);
+            renderCountries()
             toggleEnterce();
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -61,30 +63,30 @@ var fetchWheather = function (city) { //get the weather data from the api
         method: "GET",
         url: 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&appid=d703871f861842b79c60988ccf3b17ec',
         success: function (data) {
-             wheather= data.main.temp.toFixed(0);
-             fahrenheit = (wheather * 9 / 5 + 32).toFixed(0);
-             weathericon = data.weather[0].icon
-             renderInfo();
+            wheather = data.main.temp.toFixed(0);
+            fahrenheit = (wheather * 9 / 5 + 32).toFixed(0);
+            weathericon = data.weather[0].icon
+            renderInfo();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus);
-            
+
         }
     });
-    
+
 };
 
 
-function saveData(data){ //save the data of the country  
-    country.name=data.basic.name.common;
-    country.capital=data.basic.capital.name;
-    country.flagLink=data.basic.flag.png;
-    country.languages=data.basic.languages;
-    country.continent=data.basic.location.region;
-    country.wikipediaLink=data.basic.wikipediaUrl;
+function saveData(data) { //save the data of the country  
+    country.name = data.basic.name.common;
+    country.capital = data.basic.capital.name;
+    country.flagLink = data.basic.flag.png;
+    country.languages = data.basic.languages;
+    country.continent = data.basic.location.region;
+    country.wikipediaLink = data.basic.wikipediaUrl;
 }
 
-function renderInfo(){ //display the data in html by handelbars
+function renderInfo() { //display the data in html by handelbars
     country.tempc = wheather
     country.far = fahrenheit
     country.icon = weathericon
@@ -99,27 +101,52 @@ $("#submitcountry").click(function () {
     var countryname = $("#country").val().toLowerCase();
     var userId = user._id
     var emailAdd = user.email
-    for (var i = 0; i < user.trips.length; i++){
+    for (var i = 0; i < user.trips.length; i++) {
         if (user.trips[i].country == countryname) {
-        fetchCountryData(countryname);
-        return
+            fetchCountryData(countryname);
+            break
         }
     }
-    addCountryToUser(countryname, userId, emailAdd)
-    fetchCountryData(countryname);
-    $('.searchingcountry').toggle()
-    //console.log(country.val());
+
+    //check in array of country if country exists in api
+    for (var i = 0; i < countryInApi.length; i++) {
+        if (countryInApi[i].name.toLowerCase() == countryname) {
+            addCountryToUser(countryname, userId, emailAdd)
+            fetchCountryData(countryname);
+            $('.searchingcountry').toggle()
+            break
+        // if country is not found display error message
+        // } else {
+        //     $('.countryreq').show()     
+        }
+    }
 });
 
- function toggleEnterce(){
-    $('.choosecountry').toggle();
-    $('.search-result').toggle();
-    $('.featuresBar').toggle();
- }
+function renderCountries() {
+    $('.exTrips').empty()
+    for (var i in user.trips) {
+        var country = user.trips[i].country;
+        countryToShow = country.charAt(0).toUpperCase() + country.slice(1).toLowerCase();
+        $('.exTrips').append(
+            `<a class="existCountry"
+            data-tripId="${user.trips[i]._id}"
+            data-countryName="${country}">${countryToShow}</a>  <span class="bar">|</span>
+            `);
+    }
+}
 
-function toggleBookFlight(){ 
+function toggleEnterce() {
+    $('.choosecountry').toggle();
+
+
+    $('.search-result').show();
+}
+
+
+function toggleBookFlight() {
     console.log("user wants to book a flight")
     $('.bookflight').toggle();
 }
+
 
 
