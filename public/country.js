@@ -1,5 +1,40 @@
 var country={}, wheather, fahrenheit; //object for the info and var for the tempreture
 
+var fetchUserForCountry = function (emailAdd) { //getting data from db after user added country
+    $.ajax({
+        method: "GET",
+        url: '/authorisation/' + emailAdd,
+        success: function (data) {
+            console.log("fetchUser successfully");
+            user = data;
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+        }
+    })
+}
+
+function addCountryToUser(country, userid, emailAdd) { // send the data to open a user in the db and call a function to get the user from the db
+    var userId = userid;
+    var dataToSend = {'country': country};
+    var path = '/users/'+userId+'/trips';
+    $.ajax({
+        method: "POST",
+        url: path,
+        data: dataToSend,
+        dataType: 'json',
+        success: function (data) {
+            console.log(`Added country`)
+            console.log(dataToSend)
+            fetchUserForCountry(emailAdd);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+        }
+    })
+}
+
+
 var fetchCountryData = function (country) { //get the country data from the api
     $.ajax({
         method: "GET",
@@ -10,7 +45,6 @@ var fetchCountryData = function (country) { //get the country data from the api
             'x-api-key': '77c599fb9dd83623cc39879e2cd34e7d6fc3f5a60148b7faac1befca6a9c'
         },
         success: function (data) {
-            console.log(data);
             saveData(data);
             fetchWheather(data.basic.capital.name);
             toggleEnterce();
@@ -41,7 +75,6 @@ var fetchWheather = function (city) { //get the weather data from the api
 };
 
 
-
 function saveData(data){ //save the data of the country  
     country.name=data.basic.name.common;
     country.capital=data.basic.capital.name;
@@ -63,8 +96,17 @@ function renderInfo(){ //display the data in html by handelbars
 }
 
 $("#submitcountry").click(function () {
-    var country = $("#country").val();
-    fetchCountryData(country);
+    var countryname = $("#country").val().toLowerCase();
+    var userId = user._id
+    var emailAdd = user.email
+    for (var i = 0; i < user.trips.length; i++){
+        if (user.trips[i].country == countryname) {
+        fetchCountryData(countryname);
+        return
+        }
+    }
+    addCountryToUser(countryname, userId, emailAdd)
+    fetchCountryData(countryname);
     $('.searchingcountry').toggle()
     //console.log(country.val());
 });
@@ -75,9 +117,9 @@ $("#submitcountry").click(function () {
     $('.features').toggle();
  }
 
-
 function toggleBookFlight(){ 
     console.log("user wants to book a flight")
     $('.bookflight').toggle();
 }
+
 

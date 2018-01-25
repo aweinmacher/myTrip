@@ -172,12 +172,18 @@ h3 {
     text-transform: uppercase;
     letter-spacing: 4px;
 }
+
 .toDo {
     display: none;
 }
 
 
 
+/* Hello */
+.hello {
+    border: 0;
+    display: none;
+}
 
 
 .glyphicon-refresh-animate {
