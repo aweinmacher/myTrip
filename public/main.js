@@ -48,6 +48,7 @@ function openUser(emailAdd, firstname) { // send the data to open a user in the 
         dataType: 'json',
         success: function (data) {
             console.log(`Data loaded`);
+
         },
         complete: function () {
             fetchUser(dataToSend.email, dataToSend.name);

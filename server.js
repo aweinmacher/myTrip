@@ -24,8 +24,8 @@ app.get('/authorisation/:email', function (req, res) {
   User.find({ 'email': email }, function (err, data) {
     if (err) throw err;
     if (!data.length) res.send(undefined); // no such user
-    if (!data[0].trips.length) res.send(data[0]); // user exists but has no trips
-    data[0].populate('trips', function (err, updUser) { // user has trips and we populate them
+    else if (!data[0].trips.length) res.send(data[0]); // user exists but has no trips
+    else data[0].populate('trips', function (err, updUser) { // user has trips and we populate them
       if (err) throw err;
       Trip.find({ "user": updUser._id }, function (err, myTrips) { // now we have an array of trips
         if (err) throw err;
