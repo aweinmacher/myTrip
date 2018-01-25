@@ -64,6 +64,10 @@ var fetchWheather = function (city) { //get the weather data from the api
     $.ajax({
         method: "GET",
         url: 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&appid=d703871f861842b79c60988ccf3b17ec',
+        headers: {
+        'Origin': 'https://mytrip-106.herokuapp.com',
+        'Access-Control-Request-Method': 'GET'
+        },
         success: function (data) {
             wheather = data.main.temp.toFixed(0);
             fahrenheit = (wheather * 9 / 5 + 32).toFixed(0);
