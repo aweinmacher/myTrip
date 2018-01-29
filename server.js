@@ -10,7 +10,6 @@ mongoose.connect(process.env.CONNECTION_STRING||'mongodb://localhost/tripDB', fu
 
 var app = express();
 app.use(express.static('public'));
-app.use(express.static('models'));
 app.use(express.static('node_modules'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -19,28 +18,20 @@ var User = models.user;
 var Trip = models.trip;
 var Todo = models.todo;
 
-// 1) if email exists - send user object; if not - send undefined
-// TODO: check with "go deeper" in Mongoose lesson
+// 1a) if email exists - send true; if not - false
+
+
+// 1b) send user object (only for existing)
 app.get('/authorisation/:email', function (req, res) {
   var email = req.params.email;
-  User.find({ 'email': email }, function (err, data) {
+  User.findOne({ 'email': email }).populate({
+    path: 'trips',
+    populate: {
+      path: 'todos'
+    },
+  }).exec(function (err, user) {
     if (err) throw err;
-    if (!data.length) res.send(undefined); // no such user
-    else if (!data[0].trips.length) res.send(data[0]); // user exists but has no trips
-    else data[0].populate('trips', function (err, updUser) { // user has trips and we populate them
-      if (err) throw err;
-      Trip.find({ "user": updUser._id }, function (err, myTrips) { // now we have an array of trips
-        if (err) throw err;
-        Trip.populate(myTrips, { path: 'todos', multi:true}, function (err, tripWithTodos) {
-          if (err) throw err;
-          res.send({
-            '_id': updUser.id,
-            'name': updUser.name,
-            'email': updUser.email,
-            "trips": tripWithTodos});
-        })
-      })
-    })
+    res.send(user);
   })
 })
 
