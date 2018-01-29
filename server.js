@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var models = require('./models/models');
 
 mongoose.connect(process.env.CONNECTION_STRING||'mongodb://localhost/tripDB', function (err, db) {
   if (err) { console.log("database is not connected !") };
@@ -14,11 +15,12 @@ app.use(express.static('node_modules'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-var User = require('./models/models').user;
-var Trip = require('./models/models').trip;
-var Todo = require('./models/models').todo;
+var User = models.user;
+var Trip = models.trip;
+var Todo = models.todo;
 
 // 1) if email exists - send user object; if not - send undefined
+// TODO: check with "go deeper" in Mongoose lesson
 app.get('/authorisation/:email', function (req, res) {
   var email = req.params.email;
   User.find({ 'email': email }, function (err, data) {
