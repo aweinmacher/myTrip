@@ -19,7 +19,14 @@ var Trip = models.trip;
 var Todo = models.todo;
 
 // 1a) if email exists - send true; if not - false
-
+app.get('/check/:email', function (req, res) {
+  var email = req.params.email;
+  User.findOne({ 'email': email }, function (err, data) {
+    if (err) throw err;
+    if (data) res.send(true);
+    else res.send(false);
+  })
+})
 
 // 1b) send user object (only for existing)
 app.get('/authorisation/:email', function (req, res) {
