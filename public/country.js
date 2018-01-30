@@ -14,7 +14,8 @@ var fetchUserForCountry = function (emailAdd) { //getting data from db after use
     })
 }
 
-function addCountryToUser(country, userid, emailAdd) { // send the data to open a user in the db and call a function to get the user from the db
+// send the data to open a user in the db and call a function to get the user from the db
+function addCountryToUser(country, userid, emailAdd) {
     var userId = userid;
     var dataToSend = { 'country': country };
     var path = '/users/' + userId + '/trips';
@@ -35,8 +36,8 @@ function addCountryToUser(country, userid, emailAdd) { // send the data to open 
     })
 }
 
-
-var fetchCountryData = function (country) { //get the country data from the api
+//get the country data from the api
+var fetchCountryData = function (country) {
     $.ajax({
         method: "GET",
         url: 'https://api.thebasetrip.com/v2/countries/' + country,
@@ -48,7 +49,7 @@ var fetchCountryData = function (country) { //get the country data from the api
             'x-api-key': '77c599fb9dd83623cc39879e2cd34e7d6fc3f5a60148b7faac1befca6a9c'
         },
         success: function (data) {
-            saveData(data);
+            _saveData(data);
             fetchWheather(data.basic.capital.name);
             renderCountries()
             toggleEnterce();
@@ -59,20 +60,28 @@ var fetchCountryData = function (country) { //get the country data from the api
         }
     });
 };
-
-var fetchWheather = function (city) { //get the weather data from the api
+function _saveData(data) { //save the data of the country  
+    country.name = data.basic.name.common;
+    country.capital = data.basic.capital.name;
+    country.flagLink = data.basic.flag.png;
+    country.languages = data.basic.languages;
+    country.continent = data.basic.location.region;
+    country.wikipediaLink = data.basic.wikipediaUrl;
+}
+//get the weather data from the api
+var fetchWheather = function (city) {
     $.ajax({
         method: "GET",
         url: 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&appid=d703871f861842b79c60988ccf3b17ec',
         headers: {
-        'Origin': 'https://mytrip-106.herokuapp.com',
-        'Access-Control-Request-Method': 'GET'
+            'Origin': 'https://mytrip-106.herokuapp.com',
+            'Access-Control-Request-Method': 'GET'
         },
         success: function (data) {
             wheather = data.main.temp.toFixed(0);
             fahrenheit = (wheather * 9 / 5 + 32).toFixed(0);
             weathericon = data.weather[0].icon
-            renderInfo();
+            _renderWeather();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus);
@@ -82,17 +91,8 @@ var fetchWheather = function (city) { //get the weather data from the api
 
 };
 
-
-function saveData(data) { //save the data of the country  
-    country.name = data.basic.name.common;
-    country.capital = data.basic.capital.name;
-    country.flagLink = data.basic.flag.png;
-    country.languages = data.basic.languages;
-    country.continent = data.basic.location.region;
-    country.wikipediaLink = data.basic.wikipediaUrl;
-}
-
-function renderInfo() { //display the data in html by handelbars
+//display weather data in html by handelbars
+function _renderWeather() {
     country.tempc = wheather
     country.far = fahrenheit
     country.icon = weathericon
@@ -113,17 +113,16 @@ $("#submitcountry").click(function () {
             return
         }
     }
-
-    //check in array of country if country exists in api
+    //check in countriesList if country exists in api
     for (var i = 0; i < countryInApi.length; i++) {
         if (countryInApi[i].name.toLowerCase() == countryname) {
             addCountryToUser(countryname, userId, emailAdd)
             fetchCountryData(countryname);
             $('.searchingcountry').toggle()
             return
-        // if country is not found display error message
-        // } else {
-        //     $('.countryreq').show()     
+            // if country is not found display error message
+            // } else {
+            //     $('.countryreq').show()     
         }
     }
 });
@@ -143,16 +142,9 @@ function renderCountries() {
 
 function toggleEnterce() {
     $('.choosecountry').toggle();
-
-
     $('.search-result').show();
 }
-
-
 function toggleBookFlight() {
     console.log("user wants to book a flight")
     $('.bookflight').toggle();
 }
-
-
-

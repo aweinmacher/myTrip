@@ -20,9 +20,39 @@ function signIn(email) {
     })
 }
 
-// TODO: make the function to fetch and render (both for existing and new users)
 function fetch(email) {
-
+    $.ajax({
+        method: "GET",
+        url: '/authorisation/' + email,
+        success: function(data) {
+            user = data;
+            console.log(`user data ${user}`);
+            _renderExistingTripsList(); // not ready yet
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+        }
+    })
+}
+// TODO change button "add country" to the plus in the same line
+function _renderExistingTripsList() {
+    // render greeting
+    var name = user.name;
+    var hello = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+    $('.hellouser').append("Hello " + hello);
+    // render trips
+    if (user.trips.length) {
+        for (var i in user.trips) {
+            var country = user.trips[i].country;
+            // render list of existing countries
+            countryToShow = country.charAt(0).toUpperCase() + country.slice(1).toLowerCase();
+            $('.exTrips').append(
+                `<a class="existCountry"
+               data-tripId="${user.trips[i]._id}"
+               data-countryName="${country}">${countryToShow}</a>  <span class="bar">|</span>
+               `);
+        }
+    }
 }
 
 var fetchUser = function (email, name) { //getting data from db and then send it to a function to comare the data if the user exist
@@ -43,8 +73,6 @@ var fetchUser = function (email, name) { //getting data from db and then send it
         }
     })
 }
-
-
 // ADDING EXISTING TRIPS --- ADDING EXISTING TRIPS --- ADDING EXISTING TRIPS
 var checkUserExist = function (emailAdd, name) { //check if the user exist if not send to a function that open a user
     if (user == "") {
