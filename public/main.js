@@ -135,7 +135,7 @@ $('#signUpBtn').on('click', function () {
 })
 
 $('#addtrip').on('click', function () {
-    $('.choosecountry').show();
+    $('.choosecountry').toggle();
     $('.hasTrips').show();
 
 })
@@ -145,8 +145,7 @@ $('.hello').on('click', '.existCountry', function () {
     var tripId = $(this).data().tripid;
     currentTripId = tripId;
     var countryName = $(this).data().countryname;
-    // $('.choosecountry').toggle();
-
+    $('.choosecountry').hide();
     fetchCountryData(countryName);
     renderToDo();
     $('.features').show();
