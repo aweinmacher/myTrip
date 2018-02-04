@@ -102,7 +102,7 @@ h3 {
     border-radius: 4px;
 }
 
-.loginreq{
+.loginreq, .signupreq{
     display: none;
     padding: 3px;
     border: 1px solid transparent;
@@ -208,7 +208,7 @@ h3 {
     border: 0;
     display: none;
     box-shadow: 0 0 30px black;
-
+    margin-top: 50px;
 }
 
 

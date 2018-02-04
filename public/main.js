@@ -9,7 +9,7 @@ function signIn(email) {
         success: function (data) {
             if (data) {
                 console.log('user found');
-                // fetch();
+                fetch(email);
             } else {
                 alert("Oooops, seems you are new to MyTrip! Please, sign up");
             }
@@ -24,21 +24,23 @@ function fetch(email) {
     $.ajax({
         method: "GET",
         url: '/authorisation/' + email,
-        success: function(data) {
+        success: function (data) {
             user = data;
-            console.log(`user data ${user}`);
-            _renderExistingTripsList(); // not ready yet
+            console.log(data);
+            _renderExistingTripsList();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus);
         }
     })
 }
-// TODO change button "add country" to the plus in the same line
 function _renderExistingTripsList() {
     // render greeting
     var name = user.name;
     var hello = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+    $('.page-header').hide();
+    $('#loginbox').hide();
+    $('.hellouser').show();
     $('.hellouser').append("Hello " + hello);
     // render trips
     if (user.trips.length) {
@@ -55,55 +57,25 @@ function _renderExistingTripsList() {
     }
 }
 
-var fetchUser = function (email, name) { //getting data from db and then send it to a function to comare the data if the user exist
+// on-SignUp-click check if user exists and if yes - alert to sign in, if no - add user to the DB
+function singUp(email, name) {
     $.ajax({
         method: "GET",
-        url: '/authorisation/' + email,
+        url: '/check/' + email,
         success: function (data) {
-            console.log("fetchUser successfully");
-            user = data;
-        },
-        complete: function () {
-            console.log(user);
-            checkUserExist(email, name)
-            renderToDo();
+            if (data) {
+                alert("Seems you are already registered - please, sign in!");
+            } else {
+                addUser(email, name);
+            }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus);
         }
     })
 }
-// ADDING EXISTING TRIPS --- ADDING EXISTING TRIPS --- ADDING EXISTING TRIPS
-var checkUserExist = function (emailAdd, name) { //check if the user exist if not send to a function that open a user
-    if (user == "") {
-        openUser(emailAdd, name);
-    }
-    else if (emailAdd.toLowerCase() == user.email) {
-        console.log("user found")
-        console.log(user);
-        $('.username-form').hide();
-        // $('.choosecountry').toggle();
-        var name = user.name;
-        var hello = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-        // look over trips and append existing countries
-        // function of render if it have data
-        $('.hellouser').append("Hello " + hello);
-        // if there are trips, show them and hide the AddCountry form
-        if (user.trips.length) {
-            for (var i in user.trips) {
-                var country = user.trips[i].country;
-                countryToShow = country.charAt(0).toUpperCase() + country.slice(1).toLowerCase();
-                $('.exTrips').append(
-                    `<a class="existCountry"
-                   data-tripId="${user.trips[i]._id}"
-                   data-countryName="${country}">${countryToShow}</a>  <span class="bar">|</span>
-                   `);
-            }
-        }
-    }
-}
 
-function openUser(emailAdd, firstname) { // send the data to open a user in the db and call a function to get the user from the db
+function addUser(emailAdd, firstname) { // send the data to open a user in the db and call a function to get the user from the db
     var dataToSend = {
         name: firstname,
         email: emailAdd.toLowerCase(),
@@ -133,40 +105,37 @@ $('.mytrip-logo').on('click', function () {
     window.location.reload()
 })
 
-// TODO: change to signIn(email); make button on Enter
-$('#signIn').on('click', function () {
-    var $email = $('#eMail');
+$('#signInBtn').on('click', function () {
+    var $email = $('#eMailSignIn');
     var email = $email.val();
     if (email === "") {
-        $('.loginreq').toggle()
+        $('.loginreq').show();
     } else {
+        $('.loginreq').hide();
         signIn(email);
-        // fetchUser(email, name.val());
-        // $('.signingin').toggle();
-        $('.hello').toggle();
+        $('.hello').show();
         $email.val("");
     }
 })
 
-// TODO change in HTML; make new ID for email input
-$('#signUp').on('click', function () {
+$('#signUpBtn').on('click', function () {
     var $name = $('#userName');
-    var $email = $('#eMail');
+    var $email = $('#eMailSignUp');
     var name = $name.val();
     var email = $email.val();
     if (email === "" || name === "") {
-        $('.loginreq').toggle()
+        $('.signupreq').show();
     } else {
+        $('.signupreq').hide();
         signUp(email, name);
-        // $('.signingin').toggle();
-        $('.hello').toggle();
+        $('.hello').show();
         $name.val("");
         $email.val("");
     }
 })
 
 $('#addtrip').on('click', function () {
-    $('.choosecountry').toggle();
+    $('.choosecountry').show();
     $('.hasTrips').show();
 
 })
@@ -176,7 +145,7 @@ $('.hello').on('click', '.existCountry', function () {
     var tripId = $(this).data().tripid;
     currentTripId = tripId;
     var countryName = $(this).data().countryname;
-    $('.choosecountry').toggle();
+    // $('.choosecountry').toggle();
 
     fetchCountryData(countryName);
     renderToDo();

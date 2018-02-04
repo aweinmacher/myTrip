@@ -34,80 +34,67 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active">
-              <a href="#">Intro </a>
-            </li>
-            <li>
-              <a href="#">Flight Details</a>
-            </li>
-            <li>
-              <a href="#">Wish To Do</a>
-            </li>
-
+            <li class="active"> <a href="#">Intro </a> </li>
+            <li> <a href="#">Flight Details</a> </li>
+            <li> <a href="#">Wish To Do</a> </li>
           </ul>
-
         </div>
       </div>
     </nav>
   </div>
 
 
-
   <!-- WELCOME USER !-->
   <div class="container">
     <div class="page-header">
       <h1>Welcome To My Trip</h1>
-      <h3>The ultimate place to store your next trip info and see others wish to do lists</h3>
+      <h3>The ultimate place to store your next trip info</h3>
     </div>
-
   </div>
-
-  <!-- CLOUDS OPTIONAL
-  <div class="cloud x1"></div>
-  <div class="cloud x2"></div>
-  <div class="cloud x3"></div>
-  <div class="cloud x4"></div>
-!-->
 
   <!-- USER LOGIN !-->
   <div class="container">
-
     <div id="loginbox" class="username-form mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-
       <div class="panel">
-        <div class="panel-heading">
-          <div class="panel-title text-center">Please enter your name and email below</div>
-        </div>
-
-
         <div class="panel-body">
-
-          <form id="form" class="post-form username-form form-horizontal">
-
+          <!-- Sign In -->
+          <form id="signIn" class="post-form username-form form-horizontal">
             <div class="input-group">
-              <span class="input-group-addon">
-                <i class="glyphicon glyphicon-user"></i>
-              </span>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+              <input class="form-control" type="text" id="eMailSignIn" placeholder="Email" />
+            </div>
+            <div class="loginreq text-center alert-danger fade in">
+                <strong><i class="glyphicon glyphicon-alert"></i> Please enter your email </strong>
+              </div>
+            <div class="form-group"> <!-- Button -->
+              <div class="col-sm-12 controls">
+                <button type="button" id="signInBtn" class="btn btn-login pull-right">
+                  <i class="glyphicon glyphicon-log-in"></i> Sign In
+                  <span class="signingin glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                </button>
+              </div>
+            </div>
+          </form>
+          <div class="panel-heading">
+              <div class="panel-title text-center">OR:</div>
+          </div>
+          <!-- Sign Up -->
+          <form id="signUp" class="post-form username-form form-horizontal">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
               <input class="form-control" type="text" id="userName" placeholder="Name" />
             </div>
-
             <div class="input-group">
-              <span class="input-group-addon">
-                <i class="glyphicon glyphicon-envelope"></i>
-              </span>
-              <input class="form-control" type="text" id="eMail" placeholder="Email" />
+              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+              <input class="form-control" type="text" id="eMailSignUp" placeholder="Email" />
             </div>
-
-            <div class="loginreq text-center alert-danger  fade in">
-              <strong>
-                <i class="glyphicon glyphicon-alert"></i> Make sure you entered your name and email </strong>
+            <div class="signupreq text-center alert-danger fade in">
+              <strong> <i class="glyphicon glyphicon-alert"></i> Please enter your name and email </strong>
             </div>
-
-            <div class="form-group">
-              <!-- Button -->
+            <div class="form-group"> <!-- Button -->
               <div class="col-sm-12 controls">
-                <button type="button" id="signIn" class="btn btn-login pull-right">
-                  <i class="glyphicon glyphicon-log-in"></i> Sign in
+                <button type="button" id="signUpBtn" class="btn btn-login pull-right">
+                  <i class="glyphicon glyphicon-log-in"></i> Sign Up
                   <span class="signingin glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
                 </button>
               </div>
@@ -119,15 +106,13 @@
     </div>
   </div>
 
-
+  <!-- GREETING -->
   <div class="container hello">
     <h1 class="hellouser"></h1>
-
-     <div class="hasTrips">
-       <h1>My Trips:</h1>
-      <h1 class="exTrips">  </h1>  
+    <div class="hasTrips">
+      <h1 class="exTrips">Trips: </h1>
       <button type="button" id="addtrip" class="btn btn-search">Add New Trip</button>
-     </div>
+    </div>
   </div>
 
   <!-- CHOOSE COUNTRY !-->
@@ -152,9 +137,9 @@
           <span class="searchingcountry glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
         </button>
         <div class="countryreq text-center alert-danger  fade in">
-            <strong>
-              <i class="glyphicon glyphicon-alert"></i> Country Not Found </strong>
-          </div>
+          <strong>
+            <i class="glyphicon glyphicon-alert"></i> Country Not Found </strong>
+        </div>
       </div>
     </form>
   </div>
